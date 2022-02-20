@@ -37,9 +37,9 @@ enemy_height=enemy_size[1]
 enemy_x_pos=random.randint(0,screen_width)
 enemy_y_pos=0
 
-e_to_x=0
+#e_to_x=0
 e_to_y=0
-enemy_speed=0.05
+enemy_speed=10
 
 
 ####################################################
@@ -54,13 +54,18 @@ while running:
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             running=False
+
         
-        if enemy_y_pos<=screen_height:    
-            e_to_y += enemy_speed
-        
+        #while enemy_y_pos<screen_height:         
+        #    enemy_speed+=0.05
+        #    print(enemy_y_pos)
+        #if enemy_y_pos==screen_height:
+        #    enemy_y_pos=0
+        #    enemy_x_pos=random.randint(0,screen_width)
+            
         if event.type==pygame.KEYDOWN:
             if event.key==pygame.K_LEFT:
-                to_x-=character_speed
+                to_x-=character_speed                
             elif event.key==pygame.K_RIGHT:
                 to_x+=character_speed
                 
@@ -86,16 +91,17 @@ while running:
     elif character_x_pos>screen_width-character_width:
         character_x_pos=screen_width-character_width
     
-    enemy_x_pos+=e_to_x*dt
-    enemy_y_pos+=e_to_y*dt
+    #enemy_x_pos+=e_to_x*dt
+    enemy_y_pos+=enemy_speed
         
     if enemy_x_pos<0:
         enemy_x_pos=0
     elif enemy_x_pos>screen_width-enemy_width:
-        enemy_x_pos=screen_width=enemy_width
+        enemy_x_pos=screen_width-enemy_width
     if enemy_y_pos>screen_height:
         enemy_y_pos=0
-        enemy_x_pos=random.randint(0,screen_width)      
+        enemy_x_pos=random.randint(0,screen_width)
+        
 
 #4 충돌 처리
     character_rect=character.get_rect()
